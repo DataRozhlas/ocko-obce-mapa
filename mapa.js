@@ -11,13 +11,6 @@ const bg = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light
   maxZoom: 15,
 });
 
-const brks = [
-  [0.46, '#b2182b'],
-  [0.54, '#ef8a62'],
-  [0.6, '#fddbc7'],
-  [0.6, '#67a9cf'],
-];
-
 const legend = L.control({ position: 'bottomright' });
 
 legend.onAdd = function (map) {
@@ -84,7 +77,7 @@ const geojson = L.topoJson(null, {
       const obyv = d[2] + d[4] + d[6] + d[8] + d[10] + d[12];
       // if ((val === Infinity) || (isNaN(val))) { return; }
       layer.bindPopup(
-        `<b>${d[1]}</b><br>Naočkováno ${getPct(sumOcko, obyv)} % způsobilých obyvatel.<br>`
+        `<b>${d[1]}</b><br>Naočkováno ${getPct(sumOcko, obyv)} % způsobilých obyvatel (z celkem ${obyv.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '&nbsp;')}).<br>`
         + `<br>${getPct(d[13], d[12])} % dětí do 16 let`
         + `<br>${getPct(d[3], d[2])} % osob 16+`
         + `<br>${getPct(d[11], d[10])} % osob 16-29`
