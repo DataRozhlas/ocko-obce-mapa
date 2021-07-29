@@ -73,13 +73,13 @@ const geojson = L.topoJson(null, {
   onEachFeature(feature, layer) {
     layer.on('click', (e) => {
       const d = data.find((o) => o[0] === e.target.feature.properties.kod);
-      const sumOcko = d[3] + d[5] + d[7] + d[9] + d[11] + d[13];
-      const obyv = d[2] + d[4] + d[6] + d[8] + d[10] + d[12];
+      const sumOcko = d[5] + d[7] + d[9] + d[11] + d[13];
+      const obyv = d[4] + d[6] + d[8] + d[10] + d[12];
       // if ((val === Infinity) || (isNaN(val))) { return; }
       layer.bindPopup(
         `<b>${d[1]}</b><br>Naočkováno ${getPct(sumOcko, obyv)} % způsobilých obyvatel (z celkem ${obyv.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '&nbsp;')}).<br>`
         + `<br>${getPct(d[13], d[12])} % dětí do 16 let`
-        + `<br>${getPct(d[3], d[2])} % osob 16+`
+        //+ `<br>${getPct(d[3], d[2])} % osob 16+`
         + `<br>${getPct(d[11], d[10])} % osob 16-29`
         + `<br>${getPct(d[9], d[8])} % osob 30-49`
         + `<br>${getPct(d[7], d[6])} % osob 50-59`
@@ -115,8 +115,8 @@ fetch(`${host}/obce.json`)
 
 function getCol(oid) {
   const d = data.find((e) => e[0] === oid);
-  const val = (d[3] + d[5] + d[7] + d[9] + d[11] + d[13])
-    / (d[2] + d[4] + d[6] + d[8] + d[10] + d[12]);
+  const val = (d[5] + d[7] + d[9] + d[11] + d[13])
+    / (d[4] + d[6] + d[8] + d[10] + d[12]);
 
   if ((val === Infinity) || (isNaN(val)) || (val < 0)) { return 'lightgray'; }
 
